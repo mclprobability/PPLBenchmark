@@ -1,3 +1,3 @@
 paths:
-  log_path: "logs" # do not delete this, ppl_benchmark.utils.log relies on that path
+  log_path: "ppl_benchmark/logs" # do not delete this, ppl_benchmark.utils.log relies on that path
 

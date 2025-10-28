@@ -7,6 +7,9 @@ pyro-ppl
 numpyro
 jax
 
+# tests
+parameterized
+
 # Data Analysis and Visualization
 matplotlib
 pandas
