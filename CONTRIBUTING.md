@@ -1,4 +1,4 @@
-# Contributing to PPL_Benchmark
+# Contributing to PPLBenchmark
 
 Thank you for considering contributing to **PPL_Benchmark**! This document outlines the process for contributing and collaborating effectively.
 
