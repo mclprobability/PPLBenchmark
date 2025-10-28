@@ -1,0 +1,13 @@
+# requirements.txt
+
+# Core Scientific/Machine Learning Libraries
+numpy
+torch
+pyro-ppl
+numpyro
+jax
+
+# Data Analysis and Visualization
+matplotlib
+pandas
+seaborn

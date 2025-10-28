@@ -1,0 +1,12 @@
+name: pyro_numpyro
+channels:
+  - https://repo.anaconda.com/pkgs/r
+  - https://repo.anaconda.com/pkgs/main
+dependencies:
+  - python=3.11
+  - conda-forge::pytorch
+  - pyro-ppl
+  - numpyro
+  - matplotlib
+  - pandas
+  - seaborn
