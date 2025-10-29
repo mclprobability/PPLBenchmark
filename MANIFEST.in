@@ -1,0 +1,2 @@
+include ppl_benchmark/config/*.yml
+recursive-include ppl_benchmark/logs *

@@ -1,0 +1,12 @@
+# SVI specific parameters
+svi_iterations: 200
+learning_rate: 0.01
+num_particles: 1
+
+# MCMC specific parameters
+mcmc_samples: 200
+mcmc_warmup_steps: 100
+num_chains: 1
+
+# Global random seed for all experiments
+seed: 1

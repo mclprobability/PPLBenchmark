@@ -1,0 +1,25 @@
+{
+    "[python]": {
+        "editor.rulers": [
+            {
+                "column": 80,
+                "color": "#ec8e22"
+            },
+            {
+                "column": 120,
+                "color": "#ff2d08"
+            },
+        ],
+    },
+    "python.testing.unittestEnabled": true,
+    "python.testing.pytestEnabled": false,
+    "python.formatting.provider": "black",
+    "python.analysis.typeCheckingMode": "basic",
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./tests",
+        "-p",
+        "test*.py"
+    ]
+}
