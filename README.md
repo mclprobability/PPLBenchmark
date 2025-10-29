@@ -42,7 +42,7 @@ Probabilistic programming frameworks like Pyro and NumPyro make it easy to defin
 The project is structured into modular components
 
 ```
-PPL_Benchmark/
+PPLBenchmark/
 │
 ├── ppl_benchmark/
 │   ├── core/                  # Benchmark and inference logic
@@ -63,7 +63,7 @@ PPL_Benchmark/
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/mclprobability/PPLBenchmark.git
-cd PPL_Benchmark
+cd PPLBenchmark
 ```
 
 ### 2. Set up an anaconda environment (recommended)
