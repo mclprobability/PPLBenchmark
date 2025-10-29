@@ -2,13 +2,13 @@ import jax
 import jax.numpy as jnp
 from functools import partial
 
-    """
-    Showcase how to implement a custom gradient in jax that updates its states over iterations. 
-    This could be implemented in numpyro, to truely enable gradient-profiling methods. 
-    A successful implementation requires changes in mcmc.run() and svi.update(), since the gradients are retrieved there.
-    Atm, this is considered too much effort to be implemented. 
-    Keep this file as inspiration, if the functionality shall be deeper integrated in the future. 
-    """
+"""
+Showcase how to implement a custom gradient in jax that updates its states over iterations. 
+This could be implemented in numpyro, to truely enable gradient-profiling methods. 
+A successful implementation requires changes in mcmc.run() and svi.update(), since the gradients are retrieved there.
+Atm, this is considered too much effort to be implemented. 
+Keep this file as inspiration, if the functionality shall be deeper integrated in the future. 
+"""
 
 def with_running_grad(fun):
     """
