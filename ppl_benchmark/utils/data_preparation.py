@@ -55,10 +55,11 @@ def eight_schools_data(data_csv, nrows=None):
 
 
 def eight_schools_data_conversion(df, framework):
-    if framework == "NumPyro":
+    framework = framework.lower()
+    if framework == "numpyro":
         y = jnp.array(df["improvement"].values, dtype=jnp.float32)
         sigma = jnp.array(df["stderr"].values, dtype=jnp.float32)
-    elif framework == "Pyro":
+    elif framework == "pyro":
         y = torch.tensor(df["improvement"].values, dtype=torch.float32)
         sigma = torch.tensor(df["stderr"].values, dtype=torch.float32)
 

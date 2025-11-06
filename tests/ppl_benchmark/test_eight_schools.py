@@ -47,43 +47,32 @@ class TestEightSchools(unittest.TestCase):
         cfg.svi_iterations = 20
         cfg.mcmc_samples = 15
         cfg.mcmc_warmup_steps = 5
-        #cfg.rows_nr = 10
 
-        """
+        
         # prepare data similar to __main__.py
         # tests are located in tests/ppl_benchmark/, project root is two levels up
         project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
         input_dir = os.path.join(project_root, "data", "0_raw")
         input_path = os.path.join(input_dir, "eight_schools_data.csv")
-        #df = md.transform_data(input_path, cfg.rows_nr)
-        """
-
-        #some data for eight schools
-        y = torch.tensor([28, 8, -3, 7, -1, 1, 18, 12], dtype=torch.float)
-        sigma = torch.tensor([15, 10, 16, 11, 9, 11, 10, 18], dtype=torch.float)
-        model_args = (y, sigma)
+        df = md.eight_schools_data(input_path)
+        y, sigma = md.eight_schools_data_conversion(df, framework.name)
 
         # prepare data for pyro and numpyro
         match framework:
             case Framework.PYRO:
-                #x_data, y_data = md.data_interaction(df)
                 model = es_model.EightSchoolsPyro()
 
             case Framework.NUMPYRO:
-                #x_data, y_data = md.data_interaction_np(df)
                 model = es_model.EightSchoolsNumPyro()
 
             case _:
                 raise NotImplementedError(f"Framework {framework} not implemented in test")
      
+        model_args = (y, sigma)
         # build model and model args compatible with benchmark.benchmark_model
         guide = None
         kernel = None
         if framework == Framework.PYRO:
-            #some data for eight schools
-            y = torch.tensor([28, 8, -3, 7, -1, 1, 18, 12], dtype=torch.float)
-            sigma = torch.tensor([15, 10, 16, 11, 9, 11, 10, 18], dtype=torch.float)
-            model_args = (y, sigma)
 
             if inference_routine == InferenceRoutine.MCMC:
                 kernel = pyro.infer.mcmc.NUTS(model, adapt_step_size=True)
@@ -92,10 +81,7 @@ class TestEightSchools(unittest.TestCase):
             else:
                 raise NotImplementedError(f"Inference routine {inference_routine} in framework {framework} not implemented")    
         elif framework == Framework.NUMPYRO:
-            model = es_model.EightSchoolsNumPyro()
-            y_data = jnp.array([28., 8., -3., 7., -1., 1., 18., 12.])
-            sigma_data = jnp.array([15., 10., 16., 11., 9., 11., 10., 18.])
-            model_args = (y_data, sigma_data)
+
             if inference_routine == InferenceRoutine.MCMC:
                 kernel = numpyro.infer.NUTS(model, adapt_step_size=True)
             elif inference_routine == InferenceRoutine.SVI:
