@@ -92,7 +92,7 @@ class TestEightSchools(unittest.TestCase):
             else:
                 raise NotImplementedError(f"Inference routine {inference_routine} in framework {framework} not implemented")    
         elif framework == Framework.NUMPYRO:
-            #model = es_model.EightSchoolsNumPyro()
+            model = es_model.EightSchoolsNumPyro()
             y_data = jnp.array([28., 8., -3., 7., -1., 1., 18., 12.])
             sigma_data = jnp.array([15., 10., 16., 11., 9., 11., 10., 18.])
             model_args = (y_data, sigma_data)
@@ -114,18 +114,10 @@ class TestEightSchools(unittest.TestCase):
 
         # assert that all fields of BenchmarkResult are set
         self.assertIsNotNone(result.execution_time)
-
-
-        # temporary solution for Numpyro without forward/backward counting
-        if framework == Framework.NUMPYRO:
-            if inference_routine == InferenceRoutine.SVI:
-                self.assertIsNone(result.forward_calls)
-                self.assertIsNone(result.backward_calls)
-            elif inference_routine == InferenceRoutine.MCMC:
-                self.assertIsNotNone(result.forward_calls)
-                self.assertIsNotNone(result.backward_calls)
-                self.assertGreater(result.forward_calls, 0.)
-                self.assertGreater(result.backward_calls, 0.)
+        self.assertIsNotNone(result.forward_calls)
+        self.assertIsNotNone(result.backward_calls)
+        self.assertGreater(result.forward_calls, 0.)
+        self.assertGreater(result.backward_calls, 0.)
 
         if inference_routine == InferenceRoutine.SVI:
             self.assertIsNotNone(result.svi_result)
