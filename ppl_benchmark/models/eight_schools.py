@@ -6,13 +6,13 @@ import torch
 import pyro
 import pyro.distributions as dist
 from pyro.nn import PyroModule, PyroSample
-import ppl_benchmark.core.mcmc_pyro as pnuts
+import ppl_benchmark.core.pyro_backend.mcmc_inference as pnuts
 
 import jax.numpy as jnp
 import numpyro
 import numpyro.distributions as distnp
-import ppl_benchmark.core.numpyro_mcmc as nmcmc
-from ppl_benchmark.core.numpyro_mcmc import Counter
+import ppl_benchmark.core.numpyro_backend.mcmc_inference as nmcmc
+from ppl_benchmark.core.counter import Counter
 from ppl_benchmark.models.base_model import BenchmarkPyroModule
 
 
