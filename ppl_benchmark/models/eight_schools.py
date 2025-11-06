@@ -46,18 +46,24 @@ class EightSchoolsPyro(BenchmarkPyroModule):
 class EightSchoolsNumPyro:
     def __init__(self, J=8, mu_loc=0., mu_scale=10., tau_loc=0., tau_scale=10.):
         self.J = J
-        self.mu = distnp.Normal(mu_loc, mu_scale)
-        self.tau = distnp.HalfCauchy(tau_scale)
+        self.mu_dist = distnp.Normal(mu_loc, mu_scale)
+        self.tau_dist = distnp.HalfCauchy(tau_scale)
+        
         self.forward_counter = Counter()
+        
+        self.model = self._model_fn
 
-    def __call__(self, y, sigma):
-        self.forward_counter.inc()
-        mu = numpyro.sample("mu", self.mu)
-        tau = numpyro.sample("tau", self.tau)
-        with numpyro.plate('schools', self.J):
-            # todo: CFi: does this count J-times (as the plate "is executed J-times")?
-            theta = nmcmc.counted_identity(numpyro.sample('theta', distnp.Normal(mu, tau)))
+    def _model_fn(self, y, sigma):
+        mu = numpyro.sample("mu", self.mu_dist)
+        tau = numpyro.sample("tau", self.tau_dist)
 
-            numpyro.sample('obs', distnp.Normal(theta, sigma), obs=y)
+        with numpyro.plate("schools", self.J):
+            theta = numpyro.sample("theta", distnp.Normal(mu, tau))
+            numpyro.sample("obs", distnp.Normal(theta, sigma), obs=y)
 
         return theta
+
+    def __call__(self, y, sigma):
+        return self._model_fn(y, sigma)
+    
+
